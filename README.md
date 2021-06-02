@@ -7,7 +7,7 @@ Notes and tutorial obtained from courses CS224W
 - Graph: entites with relations/interactions
 - Types: Networks (social, communication, biomedicine, ...) vs representation (information, software, relational structures, similarity networks)
 - Complex: Arbitrary size, complex topological order, dynamic, no ordering or reference 
-- Representation: nodes --> d-dimensional embeddings
+- Representation: nodes $\rightarrow$ d-dimensional embeddings
 - Traditional: Graphlets, Graph Kernels
 - Node embeddings: DeepWalk, Node2Vec
 - GNN: GCN, GraphSAGE, GAT
@@ -25,8 +25,8 @@ Notes and tutorial obtained from courses CS224W
     * Directed: Arcs (Phone calls, followers)
     * Undirected: symmetrical, reciprocal (collaborations, friendship)
 - Nodes:
-    * Directed: in-degree vs out-degree, source vs sink, avg(E/N)
-    * Undirected: #Adjacent link, Avg (2E/N)
+    * Directed: in-degree vs out-degree, source vs sink, avg($\frac{E}{N}$)
+    * Undirected: #Adjacent link, Avg ($\frac{2E}{N}$)
 - Bipartite Graph: subset U and V such that eve (Author-Papers, Actors-Movies, Users-Movies)
 - Folded networks: (collaboration, co-rating)
 - Adjacency matrix: non-symmetric directed graph, sparse 
@@ -37,3 +37,21 @@ Notes and tutorial obtained from courses CS224W
 - Strongly connected vs weakly connected (connected if disregard the edge directions)
 - Strongly connected components (SCC): not every node is part of strongly connected components 
     * In-component vs Out-component
+
+## 2. Traditional Methods for Machine Learning in Graphs
+- Features: d-dimensional vectors:
+- Objects: nodes, edges, subgraph, graph
+- Objective function
+
+    ### 2.1 Node-level features:
+    - Node degree ($k_v$)
+    - Node centrality ($c_v$): node degree + node importance taken account
+        * Eigenvector centrality: Important as if surrounded by important nodes, recursive manner (alpha * x = A * x), largest eigenvalue is always unique and positive, leading = centrality
+        * Betweenness centrality: Lie on many shortest paths between other nodes
+        * Closeness centrality: small shortest path lengths to other nodes
+    - Clustering coefficient ($e_v$): between 0 and 1, #Triangles in ego-network
+    - Graphlets: Rooted connected non-isomorphic subgraphs
+        * Degree: #Edges node touches
+        * Clustering coefficient: #Triangle
+        * GDV: #Graphlet, local topological similarity 
+    - Important-based (influential nodes in the graph) vs structure-based (role of node based on local neighbor)
