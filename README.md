@@ -55,3 +55,29 @@ Notes and tutorial obtained from courses CS224W
         * Clustering coefficient: #Triangle
         * GDV: #Graphlet, local topological similarity 
     - Important-based (influential nodes in the graph) vs structure-based (role of node based on local neighbor)
+
+    ### 2.2 Link-level prediction:
+    - Predicted new link: rank top K node without a link  
+    - Features for pair of nodes
+    - Methods:
+        - Randomly missing links (static network)
+        - Links over time: Evolving network, based on time $t_0$ to $t_0'$, predict in the future $t_1$ to $t_1'$ (citation, social, transaction)
+    - Score (c): Number of common neighbors $\rightarrow$ non-increasing order $\rightarrow$ first n links are new links 
+    - Features:
+        - Distance-based: shortest-path distance between 2 nodes, not capture the degree of neighborhood overlap
+        - Local neighborhood overlap: Common neighbors (intersection), Jaccard's coefficient (intersection/union), Adamic-Adar index ($\frac{1}{log(k_U)}$, social network). Drawback: return 0 if no common neighbor, but still potential
+        - Global neighborhood overlap: Katz index (number of paths of all lengths between 2 pairs of nodes) - $P^{(K)}$ = $A^K$
+        $$S = (I - \beta A)^{-1} - I$$
+    
+
+    ### 2.3 Graph-level features:
+    - Kernel methods: 
+        * Similarity between 2 graph data points
+        * Kernel matrix: for all data points, positive semidefinite
+        * Representation $\phi$ such that
+        $$\phi(G) \dot \phi(G')$$
+    - Types (Bag of * )
+        * Graphlet: * = graphlet, 2 differences (no roots and not connected ), expensive even with the help of NP-hard, $G_k = (g_1, g_2, ..., g_{n_k})$
+        $$(f_G)_i = \#(g_i \in G) \text{ for } i = 1, 2, ... n_k$$
+        $$K(G, G') = h_G^T h_{G'}$$
+        * Weisfeiler-Lehman: generalized version bag-of-word, color refinement, hash function, counter number of occurrence for different colors, computationally efficient (only colors appeared in 2 graphs needs to track)
