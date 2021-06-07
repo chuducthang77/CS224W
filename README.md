@@ -81,3 +81,41 @@ Notes and tutorial obtained from courses CS224W
         $$(f_G)_i = \#(g_i \in G) \text{ for } i = 1, 2, ... n_k$$
         $$K(G, G') = h_G^T h_{G'}$$
         * Weisfeiler-Lehman: generalized version bag-of-word, color refinement, hash function, counter number of occurrence for different colors, computationally efficient (only colors appeared in 2 graphs needs to track)
+
+## 3. Node Embedding
+- Representation learning: no need to do feature engineering every time 
+    ### 3.1 Node
+
+    - Feature representation/Embedding: learnt the function to predict automatically
+        - Similarity of embeddings = similarity in network
+        - Encoder network information
+        - Many types of prediction
+    - Embedding: Similarity in embedding space = similarity in nodes
+    - Decoder: embedding $\rightarrow$ similarity\ (dot product)
+    - Encoder:
+        - "Shallow" - Embedding-lookup : Z (embedding matrix $\mathbb{R}^{d\times|V|}$) and v (indicator vector $\mathbb{I}^{|V|}$)
+    - Node similarity: 
+    - Unsupervised/self-supervised: no node labels, no node features
+    - Task independency: Used for any tasks
+
+    ### 3.2 Random Walk
+    - Embedding vector $z_u$ and probability P($v|z_u$)
+    - Probability: softmax or sigmoid function
+    - $z_u^T z_v \approx$ probability u and v co-occur on a random walk 
+    - Expressivity: Incorporate local and higher-order neighborhood information 
+        - High probability = more paths connecting 2 nodes
+    - Efficiency: Consider only pairs that co-
+    - $N_R(u): $ neighborhood of u obtained by some random walk
+    - Log-likelihood objective: $max_f \sum_{u \in V} log P(N_R(u)| z_u)$
+        - Feature representation that are predictive of the nodes in its random walk
+    - Optimization: short fixed-length random walks (for each node in u) $\rightarrow$ multiset of nodes visited from u 
+    - Loss: $\mathbb{L} = \sum_{u \in V} \sum_{v \in N_R(u)}$ -log(P($v|z_u$))
+    - Problem: O($V^2$)
+        - Negative sampling: log($\sigma(z_u^T z_v$)) - $\sum_{i = 1}^k log(\sigma(z_u^T z_{n_i}))$
+        - Noise Contrastive Estimation 
+        - Sample k proportional to its degree
+        - Larger k = more robust estimate = higher bias (5-20)
+    - Node2vec:
+        - Key: flexible $N_R(u)$ = richer node embeddings
+        - Biased $2^{nd}$ order random walk 
+        - Global (DFS) vs Local (BFS)
