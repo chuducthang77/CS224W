@@ -7,7 +7,7 @@ Notes and tutorial obtained from courses CS224W
 - Graph: entites with relations/interactions
 - Types: Networks (social, communication, biomedicine, ...) vs representation (information, software, relational structures, similarity networks)
 - Complex: Arbitrary size, complex topological order, dynamic, no ordering or reference 
-- Representation: nodes <!-- $\rightarrow$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/6ccPIq0W1e.svg"> d-dimensional embeddings
+- Representation: nodes <img src="http://www.sciweavers.org/tex2img.php?eq=%20%5Crightarrow%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt=" \rightarrow " width="19" height="8" /> d-dimensional embeddings
 - Traditional: Graphlets, Graph Kernels
 - Node embeddings: DeepWalk, Node2Vec
 - GNN: GCN, GraphSAGE, GAT
