@@ -44,12 +44,12 @@ Notes and tutorial obtained from courses CS224W
 - Objective function
 
     ### 2.1 Node-level features:
-    - Node degree ($k_v$)
-    - Node centrality ($c_v$): node degree + node importance taken account
+    - Node degree (<!-- $k_v$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=k_v">)
+    - Node centrality (<!-- $c_v$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=c_v">): node degree + node importance taken account
         * Eigenvector centrality: Important as if surrounded by important nodes, recursive manner (alpha * x = A * x), largest eigenvalue is always unique and positive, leading = centrality
         * Betweenness centrality: Lie on many shortest paths between other nodes
         * Closeness centrality: small shortest path lengths to other nodes
-    - Clustering coefficient ($e_v$): between 0 and 1, #Triangles in ego-network
+    - Clustering coefficient (<!-- $e_v$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=e_v">): between 0 and 1, #Triangles in ego-network
     - Graphlets: Rooted connected non-isomorphic subgraphs
         * Degree: #Edges node touches
         * Clustering coefficient: #Triangle
@@ -146,4 +146,43 @@ Notes and tutorial obtained from courses CS224W
         - Node classification
         - Link prediction
         - Graph classification
-        
+
+## 4. PageRank
+- Node embedding, random walk and matrix factorization are closely related
+    ### 4.1. PageRank
+    - Link: navigational vs transactional link
+    - Web: directed graph
+    - Not equally important
+    - Link:
+        - As vote: in-link and out-link (easier to fake)
+        - Not all in-links are equal (recursive)
+        - Out-link = $\frac{r_i}{d_i}$, importance = summation of in-link
+    - Stochastic adjacency matrix M 
+        - Page j, $d_j$ out-links, column stochastic matrix, sum to 1
+    - Rank vector r 
+        - Importance score of page i
+        - Sum up to 1
+        - r = M . r
+    - Stationary distribution: p(t+1) = M p(t) = p(t)
+    - Note: rank vector = principal eigenvector (eigenvalue of 1)
+    - Long-term distribution that satisfies M(M(...M(Mu)))
+
+    ### 4.2 Solving for rank vector
+    - Problem: Pages are dead ends (no out-links) and spider trap
+    - Spider trap: repeat within the same subgroup
+        - Solution: $\beta$ (0.8-0.9) follows the same path but 1 - $\beta$ teleport 
+        - Not what we want: only one page is important, the rest is useless
+    - Dead end: Converge to 0, "leak out"
+        - Fix the matrix with the column full of 0 with equal distribution
+        - Mathematically problem: make the column stochastic 
+    - PageRank equation: 
+    $$r_j = \sum_{i\rightarrow j} \beta\frac{r_i}{d_i} + (1 - \beta)\frac{1}{N}$$
+
+    ### 4.3 Random walk with restarts
+    - Bipartite User-Item Graph: Proximity on graphs
+    - Node proximity: shortest path or common neighbor
+    - Personalized PageRank: Not teleport uniformly, but to subset S
+    - Random walks with restarts: teleport back to the starting node
+    - Algorithm: random neighbor and record the visit, probability $\alpha$ to go back the set of query nodes, after a few iterations, highest visit counts will have highest proximity
+    - Benefits: multiple connections, paths, direct and indirect connections, degree of the node
+    - 
