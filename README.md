@@ -25,8 +25,8 @@ Notes and tutorial obtained from courses CS224W
     * Directed: Arcs (Phone calls, followers)
     * Undirected: symmetrical, reciprocal (collaborations, friendship)
 - Nodes:
-    * Directed: in-degree vs out-degree, source vs sink, avg($\frac{E}{N}$)
-    * Undirected: #Adjacent link, Avg ($\frac{2E}{N}$)
+    * Directed: in-degree vs out-degree, source vs sink, avg(<!-- $\frac{E}{N}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7BE%7D%7BN%7D">)
+    * Undirected: #Adjacent link, Avg (<!-- $\frac{2E}{N}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7B2E%7D%7BN%7D">)
 - Bipartite Graph: subset U and V such that eve (Author-Papers, Actors-Movies, Users-Movies)
 - Folded networks: (collaboration, co-rating)
 - Adjacency matrix: non-symmetric directed graph, sparse 
