@@ -7,7 +7,7 @@ Notes and tutorial obtained from courses CS224W
 - Graph: entites with relations/interactions
 - Types: Networks (social, communication, biomedicine, ...) vs representation (information, software, relational structures, similarity networks)
 - Complex: Arbitrary size, complex topological order, dynamic, no ordering or reference 
-- Representation: nodes $\rightarrow$ d-dimensional embeddings
+- Representation: nodes <!-- $\rightarrow$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/6ccPIq0W1e.svg"> d-dimensional embeddings
 - Traditional: Graphlets, Graph Kernels
 - Node embeddings: DeepWalk, Node2Vec
 - GNN: GCN, GraphSAGE, GAT
@@ -91,10 +91,10 @@ Notes and tutorial obtained from courses CS224W
         - Encoder network information
         - Many types of prediction
     - Embedding: Similarity in embedding space = similarity in nodes
-    - Decoder: embedding $\rightarrow$ similarity\ (dot product)
+    - Decoder: embedding $\rightarrow$ similarity (dot product)
     - Encoder:
         - "Shallow" - Embedding-lookup : Z (embedding matrix $\mathbb{R}^{d\times|V|}$) and v (indicator vector $\mathbb{I}^{|V|}$)
-    - Node similarity: 
+
     - Unsupervised/self-supervised: no node labels, no node features
     - Task independency: Used for any tasks
 
@@ -104,7 +104,7 @@ Notes and tutorial obtained from courses CS224W
     - $z_u^T z_v \approx$ probability u and v co-occur on a random walk 
     - Expressivity: Incorporate local and higher-order neighborhood information 
         - High probability = more paths connecting 2 nodes
-    - Efficiency: Consider only pairs that co-
+    - Efficiency: Consider only pairs that co-occurrence
     - $N_R(u): $ neighborhood of u obtained by some random walk
     - Log-likelihood objective: $max_f \sum_{u \in V} log P(N_R(u)| z_u)$
         - Feature representation that are predictive of the nodes in its random walk
@@ -119,3 +119,31 @@ Notes and tutorial obtained from courses CS224W
         - Key: flexible $N_R(u)$ = richer node embeddings
         - Biased $2^{nd}$ order random walk 
         - Global (DFS) vs Local (BFS)
+        - Parameters: p (return to previous node) and q ("ratio" of BFS vs DFS) 
+            - Probability $\frac{1}{p}$ and $\frac{1}{q}$
+            - Smaller p = likely to return back to the previous node
+        - Idea: Remember where you came from
+        - Benefit: Linear complexity, individually parallelizable
+        - Drawback: Embedding for each node separately $\rightarrow$ grows with the size of the graph
+        - Node classification
+
+    ### 3.3 Embedding entire graphs
+    - Tasks: Classification toxic vs non-toxic, identifying anomalous graph
+    - Simple idea: Node embedding $\rightarrow$ sum(avg) node embeddings
+    - "Virtual node": Representation of sub(graph) $\rightarrow$ node2vec
+    - Anonymous walk: instead of labels of nodes, index of first time we visited the node
+        - Grows exponentially
+        - Vector of n possible walk, record number of visits, probability distribution over walks 
+        - Sampling: graph as a probability distribution, m random walks 
+        $$m = (\frac{2}{\epsilon^2}(log(2^\eta - 2) - log(\delta)))$$
+    - Walk embedding: $z_G$ - embedding of entire graph
+        - Predict walks that co-occur in $\triangle$ = 1
+        - Objective: $max_{Z, d} \frac{1}{T }\sum_{t=\triangle}^{T - \triangle} log P(w_t| w_{t - \triangle},...,w_{t + \triangle}, z_G)$
+        - $N_R(u)$ set of random walk from u
+        - $z_G$ will feed into neural network or use dot product 
+    - Usage of node embedding:
+        - Clustering
+        - Node classification
+        - Link prediction
+        - Graph classification
+        
