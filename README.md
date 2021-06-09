@@ -185,4 +185,13 @@ Notes and tutorial obtained from courses CS224W
     - Random walks with restarts: teleport back to the starting node
     - Algorithm: random neighbor and record the visit, probability $\alpha$ to go back the set of query nodes, after a few iterations, highest visit counts will have highest proximity
     - Benefits: multiple connections, paths, direct and indirect connections, degree of the node
-    - 
+
+## 5. Message Passing and Node classification
+- Label for some nodes, but not for others $\rightarrow$ semi-supervised node classification
+    ### 5.1 Message Passing and node classification
+    - Collective classification: assign all nodes together
+    - Correlations exist: nearby nodes
+        - Homophily (individual characteristic $\rightarrow$ social connections) vs influence (vice versa)
+        - Guilt-by-association
+    -  Classification label: features, labels of neighbor, features of neighbor
+         
