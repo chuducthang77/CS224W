@@ -194,4 +194,16 @@ Notes and tutorial obtained from courses CS224W
         - Homophily (individual characteristic $\rightarrow$ social connections) vs influence (vice versa)
         - Guilt-by-association
     -  Classification label: features, labels of neighbor, features of neighbor
-         
+    - Guilt-by-association: Malicious/benign web page
+    - Examples: Document classification, part of speech, link prediction, optical character recognition, image/3D data segmentation, entity resolution in sensor networks, spam and fraud detection
+    - Markov Assumption: label of one node depends on label of its neighbor (degree 1 of neighbor)
+        - Local classifier: initial labels
+        - Relational classifier: correlations between nodes
+        - Collective inference: propagate correlations through networks 
+    - Local classifier:
+        - No network information, standard classification 
+    - Relational classifier: label based on labels/attributes of neighbors
+    - Collective inference: apply relational classifier iteratively until inconsistency between neighboring labels is minimized
+    - Semi-supervised
+
+    ### 5.2 Relational Classifiers and Iterative Classifiers
