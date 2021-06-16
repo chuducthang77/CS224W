@@ -223,4 +223,22 @@ Notes and tutorial obtained from courses CS224W
         - Use $\phi_1$ to predict the initial label $\rightarrow$ Update $z_v$ and update label $Y_v$ again
         - Challenges: Not guaranteed convergence
 
+    ### 5.3 Loopy belief propagation
+    - Message passing:
+        - #Nodes in a graph where each node can only interact with its neighbor 
+        - Path: define the order 
+        - Tree: leaves to root
+    - Label-label potential matrix: Dependency between a node and its neighbor (proportional to probability of a node j being in class $Y_j$ given that it has neighbor i in class $Y_i$)
+        - Prior belief $\phi$: $\phi(Y_i)$ - proportional to the prob of node i in class $Y_i$
+        - $m_{i\rightarrow j}(Y_j)$: estimation of j in class $Y_j$
+        - $\mathbb{L}$: set of all classes/labels
+    $$m_{i\rightarrow j}(Y_j) = \sum_{Y_i \in \mathbb{L}} \psi(Y_i, Y_j) \phi_i(Y_i)\prod_{k\in N_i j} m_{k\rightarrow i}(Y_i)$$
+
+    $$b_i(Y_i) = \phi_i(Y_i)\prod_{j \in N_i} m_{j\rightarrow i} (Y_j)$$
+    - Circle graph: No longer independent
+        - Possible but may not converge 
+        - Complex (Tree) graph with many branch
+    - Advantage: Easy to implement, parallelize and generalize $\psi(Y_i, Y_j, Y_k,...)$
+    - Challenges: Not convergence when circle
+    - Potential functions (parameters)
     
