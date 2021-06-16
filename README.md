@@ -207,3 +207,20 @@ Notes and tutorial obtained from courses CS224W
     - Semi-supervised
 
     ### 5.2 Relational Classifiers and Iterative Classifiers
+    - Relational classifiers:
+        - No node attributes
+        - Class probability $Y_v$: weighted average of class probabilities of neighbors
+            - Labeled nodes: ground-truth label $Y_v^*$
+            - Unlabeled nodes: $Y_v$ = 0.5
+        - Challenges: no node feature information and not guaranteed converge   
+    - Iterative classifiers:
+        - 2 classifiers:
+            - $\phi_1(f_v)$: Predict node based on node feature vectors
+            - $\phi_2(f_v, z_v)$: node feature vector + summary of labels of neighbors
+        - Vector $z_v$: histogram of number of each label, most common label, num of different labels
+            - I/O: Incoming/Outgoing neighbor label information vector
+            - $I_0$ = 1: 1 incoming pages is labelled 0 
+        - Use $\phi_1$ to predict the initial label $\rightarrow$ Update $z_v$ and update label $Y_v$ again
+        - Challenges: Not guaranteed convergence
+
+    
