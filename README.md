@@ -242,3 +242,16 @@ Notes and tutorial obtained from courses CS224W
     - Challenges: Not convergence when circle
     - Potential functions (parameters)
     
+## 6. Graph Neural Network
+- Recap about node embedding
+- Deep Graph Encoders: multiple layers of non-linear transformations based on graph structure
+- Tasks: node classification, link prediction, community detection, network similarity
+- Unlike traditional ML: images, speech
+
+    ### 6.2 Basics of Deep Learning
+    - Linear function: f(x) = W . x
+    - If f(x) is a scalar, W will be learnable vector
+    - If f(x) is a vector, W will be a weight matrix (Jacobian matrix)
+
+    ### 6.3 Deep Learning for Graph
+    
