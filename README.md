@@ -254,4 +254,30 @@ Notes and tutorial obtained from courses CS224W
     - If f(x) is a vector, W will be a weight matrix (Jacobian matrix)
 
     ### 6.3 Deep Learning for Graph
-    
+    - X: node features (social networks - profile, image, etc.)
+        - If no node feature: Indicator vectors (one-hot encoding) and vector of constant 1
+    - Naive approach: join adjacency matrix and features 
+        - Huge parameters + not applicable to graphs of different sizes + sensitive to node ordering
+    - Convolutional neural network
+        - Node's neighborhood defines a computational graph
+        - Determine node computation graph + propagate and transform information
+        - Every node defines a computation graph based on its neighborhood
+    - Arbitrary depth:
+        - Embedding at each layer
+        - Layer-0 = input feature
+        - Layer-k = info from nodes that k hops away
+    - Neighborhood Aggregation:
+        - Different approaches will have the same result
+        - Average the messages from neighbor 
+    - Average neighbor messages and apply a neural network: $h_v^0 = x_v$
+    $$h_v^{(l+1)}  = \sigma(W_l \sum_{u\in N(v)} \frac{h_u}{|N(v)|} + B_l h_v^{(l)})$$
+        - All node used the same transformation matrix
+    - Diagonal Matrix: $D_{v,v} = Deg(v)$
+    - Rewrite in the matrix form with $H^{(l)} = [h_1^{(l)} h_2^{(l)} ... h_{|V|}^{(l)}]$
+    $$H^{(l+1)} = D^{-1}AH^{(l)}W_l^T + H^{(l)}B_l^T$$
+        - First part: neighbor aggregation (sparse matrix)
+        - Second part: self aggregation
+    - Training: both supervised and unsupervised settings
+        - Unsupervised: node similarity (random walks, matrix factorization, node proximity) and $y_{u,v}$ is 1 
+        $$L = \sum_{z_u, z_v}CE(y_{u,v}DEC(z_u, z_v))$$
+    - Advantage: Generalize to unseen network
